@@ -1,6 +1,6 @@
 import {DataTypes} from 'sequelize'
 import {sequelize} from "../database/database.js"
-import {Token} from "./token.js"
+import {Token} from "./Token.js"
 
 
 export const User = sequelize.define('Users', {

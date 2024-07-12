@@ -6,16 +6,18 @@ import './models/Category.js'
 
 const env = process.env;
 
-const Port = parseInt(env.PORT);
+const Port = parseInt(env.PORT) || 3000;
 
 
 async function main(){
  try {
   await sequelize.sync();
   console.log("Connection has been established successfully")
-  app.listen(Port);
+  app.get('/', (req, res) => {
+    res.send('Hello World!')
+  })
 
-  console.log("Server is Listening on Port", Port)
+  console.log("Server is Listening on Port", Port )
  } catch (error) {
   console.error("Unable to connect to the database:", error)
  }

@@ -1,5 +1,5 @@
 import { expressjwt } from "express-jwt";
-import { Token } from '../models/token.js';
+import { Token } from '../models/Token.js';
 
 
 

@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { Token } from '../models/token.js';
+import { Token } from '../models/Token.js';
 
 
 export async function errorHandler(error, req, res, next){
