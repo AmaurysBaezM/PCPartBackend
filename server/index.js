@@ -17,7 +17,11 @@ async function main(){
     res.send('Hello World!')
   })
 
-  console.log("Server is Listening on Port", Port )
+  
+  app.listen(port, () => {
+    console.log("Server is Listening on Port", Port )
+  })
+  
  } catch (error) {
   console.error("Unable to connect to the database:", error)
  }
