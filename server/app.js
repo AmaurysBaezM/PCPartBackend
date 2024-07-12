@@ -10,7 +10,7 @@ import cors from "cors"
 import morgan from "morgan"
 import { authJwt } from "./middlewares/jwt.js";
 import { errorHandler } from "./middlewares/error_handler.js";
-import 'dotenv/config';
+
 
 
 const app = express();

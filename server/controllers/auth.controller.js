@@ -2,7 +2,7 @@ import { User } from '../models/Users.js';
 import { Token } from '../models/token.js';
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import 'dotenv/config';
+
 
 import {SendMail} from '../helpers/email_sender.js'
 

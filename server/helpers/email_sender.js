@@ -1,6 +1,6 @@
 import { text } from 'express';
 import nodemailer from 'nodemailer';
-import 'dotenv/config';
+
 
 
 export const SendMail = async(email, subject, body) => {

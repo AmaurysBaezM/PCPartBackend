@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { Token } from '../models/token.js';
-import 'dotenv/config';
+
 
 export async function errorHandler(error, req, res, next){
   

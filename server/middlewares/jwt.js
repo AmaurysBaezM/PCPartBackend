@@ -1,6 +1,6 @@
 import { expressjwt } from "express-jwt";
 import { Token } from '../models/token.js';
-import 'dotenv/config'
+
 
 
 

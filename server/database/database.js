@@ -1,5 +1,5 @@
 import Sequelize  from "sequelize";
-import 'dotenv/config'
+
 
 const env = process.env;
 

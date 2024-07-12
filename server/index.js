@@ -2,7 +2,7 @@ import app from "./app.js";
 import { sequelize } from "./database/database.js";
 import './models/Users.js';
 import './models/Category.js'
-import 'dotenv/config'
+
 
 const env = process.env;
 
