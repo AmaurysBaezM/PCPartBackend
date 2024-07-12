@@ -13,12 +13,13 @@ async function main(){
  try {
   await sequelize.sync();
   console.log("Connection has been established successfully")
+  
   app.get('/', (req, res) => {
     res.send('Hello World!')
   })
 
-  
-  app.listen(port, () => {
+
+  app.listen(Port, '0.0.0.0', () => {
     console.log("Server is Listening on Port", Port )
   })
   
