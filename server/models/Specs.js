@@ -1,4 +1,4 @@
-import {DataTypes} from 'sequelize'
+import {DataTypes, QueryTypes} from 'sequelize'
 import {sequelize} from "../database/database.js"
 
 

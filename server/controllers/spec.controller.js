@@ -1,4 +1,7 @@
+import { sequelize } from '../database/database.js'
 import { Spec} from '../models/Specs.js'
+import {QueryTypes} from 'sequelize'
+import {Product} from '../models/Products.js'
 
 export const getSpecs = async (req, res) => {
     try {
@@ -89,3 +92,38 @@ export const deleteSpec = async (req, res) => {
 
 
 }
+
+export const SpecforProduct = async(req, res) => {
+    try {
+        const { id } = req.params;
+        const Products = await Product.findOne({   where: {
+            ProductID: id,
+        }, });
+          
+    
+      if (!Products) {
+        return res.status(404).json({message: "El producto no existe"});
+      }
+        const Specs = await sequelize.query('SELECT * FROM get_product_specs(:productid);', {
+            replacements: { productid: id },
+            type: QueryTypes.SELECT,
+          });
+
+          if (!Specs) {
+            return res.status(404).json({message: "Especificacion no existe"});
+          }
+
+          Products.ID_Brand = undefined;
+          Products.ID_Category = undefined;
+          
+    
+            res.status(200).json({...Products.dataValues, Spec: Specs})
+    } catch (error) {
+        return res.status(500).json({ message: error.message }) 
+    }
+
+  
+
+   
+}
+

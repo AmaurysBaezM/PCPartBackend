@@ -62,7 +62,7 @@ export const login = async (req, res) => {
 
 
 
-      return res.json({...Users.dataValues, accessToken});
+      return res.status(200).json({...Users.dataValues, Token: accessToken});
 
 
     } catch (error) {

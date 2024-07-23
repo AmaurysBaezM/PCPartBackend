@@ -19,7 +19,7 @@ async function main(){
   })
 
 
-  app.listen(Port, '0.0.0.0', () => {
+  app.listen(Port, () => {
     console.log("Server is Listening on Port", Port )
   })
   
