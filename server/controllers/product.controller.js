@@ -2,8 +2,35 @@ import { Product } from '../models/Products.js'
 
 export const getProducts = async (req, res) => {
     try {
-        const Products = await Product.findAll()
-        res.json(Products)
+        // Obtener parámetros de paginación del cuerpo de la solicitud
+        const { page = 1, pageSize = 10 } = req.body;
+
+        // Convertir los parámetros a números enteros
+        const currentPage = parseInt(page, 10);
+        const pageSizeNumber = parseInt(pageSize, 10);
+
+        // Calcular el offset
+        const offset = (currentPage - 1) * pageSizeNumber;
+
+        // Obtener los productos con paginación
+        const { count, rows: products } = await Product.findAndCountAll({
+            limit: pageSizeNumber,
+            offset: offset
+        });
+
+        // Calcular el número total de páginas
+        const totalPages = Math.ceil(count / pageSizeNumber);
+
+        // Responder con los productos y datos de paginación
+        res.json({
+            products,
+            pagination: {
+                totalItems: count,
+                totalPages: totalPages,
+                currentPage: currentPage,
+                pageSize: pageSizeNumber
+            }
+        });
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
