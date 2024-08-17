@@ -1,4 +1,5 @@
 import { User } from '../models/Users.js'
+import {Shipping_Address} from '../models/Shipping_Address.js'
 import bcrypt from "bcrypt";
 
 import {validationResult} from 'express-validator';
@@ -115,5 +116,30 @@ export const deleteUser = async (req, res) => {
         return res.status(500).json({ message: error.message });
     }
 
+
+}
+
+export const createShippingAddress = async (req, res) => {
+    const { AddressLine1, AddressLine2, AddressLine3,AddressCity,AddressState,AddressPostalCode,AddressCountry} = req.body
+   
+    try {
+        const NewAddress = await Shipping_Address.create({
+            AddressLine1: AddressLine1,
+            AddressLine2:AddressLine2,
+            AddressLine3:AddressLine3,
+            AddressCity: AddressCity,
+            AddressState: AddressState,
+            AddressPostalCode: AddressPostalCode,
+            AddressCountry: AddressCountry
+
+            
+         
+        })
+
+        res.json(NewAddress);
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
+ 
 
 }

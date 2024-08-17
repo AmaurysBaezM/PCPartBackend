@@ -1,30 +1,47 @@
 import {DataTypes} from 'sequelize'
 import {sequelize} from "../database/database.js"
-import {Spec} from "./Specs.js"
-import {Shopping_Cart} from "./Shopping_Cart.js"
 
 
 
 
-export const Product = sequelize.define('Products', {
-    ProductID:{
+
+
+export const Shipping_Address = sequelize.define('Shipping_Address', {
+    AddressID:{
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         
     },
-    ProductName:{
+    AddressLine1:{
         type: DataTypes.TEXT,
         allowNull: false
     },
-    ProductPrice:{
-        type: DataTypes.DECIMAL(19,4),
+    AddressLine2:{
+        type: DataTypes.TEXT,
         allowNull: false
     },
-    ProductAmount:{
-        type: DataTypes.INTEGER,
+    AddressLine3:{
+        type: DataTypes.TEXT,
         allowNull: false
     },
+    AddressCity:{
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    AddressState:{
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    AddressPostalCode:{
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    AddressCountry:{
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+  
   
     
     
@@ -34,7 +51,7 @@ export const Product = sequelize.define('Products', {
 
 
 
-},{    timestamps: false,  tableName: 'Products'},)
+},{    timestamps: false,  tableName: 'Shipping_Address'},)
 
 
 Product.hasMany(Spec, {

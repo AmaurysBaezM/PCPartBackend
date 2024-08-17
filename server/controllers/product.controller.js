@@ -6,7 +6,7 @@ export const getProducts = async (req, res) => {
         const { page = 1, pageSize = 10 } = req.body;
 
         // Convertir los parámetros a números enteros
-        const currentPage = parseInt(page, 10);
+        const currentPage = parseInt(page, 10); 
         const pageSizeNumber = parseInt(pageSize, 10);
 
         // Calcular el offset

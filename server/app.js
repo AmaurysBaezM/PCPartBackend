@@ -6,6 +6,8 @@ import BrandRoutes from "./routes/Brand.routes.js"
 import ProductRoutes from "./routes/Product.routes.js"
 import SpecRoutes from "./routes/Spec.routes.js"
 import AuthRoutes from "./routes/Auth.routes.js"
+import PayRoutes from "./routes/payment.routes.js"
+import CartRoutes from "./routes/Cart.routes.js"
 import cors from "cors"
 import morgan from "morgan"
 import { authJwt } from "./middlewares/jwt.js";
@@ -35,6 +37,8 @@ app.use(`${process.env.API_URL}`, BrandRoutes);
 app.use(`${process.env.API_URL}`, ProductRoutes);
 app.use(`${process.env.API_URL}`, SpecRoutes);
 app.use(`${process.env.API_URL}`, AuthRoutes);
+app.use(`${process.env.API_URL}`, PayRoutes);
+app.use(`${process.env.API_URL}`, CartRoutes);
 
 
 
