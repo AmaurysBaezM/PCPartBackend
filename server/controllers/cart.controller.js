@@ -102,42 +102,49 @@ export const createCarts = async (req, res) => {
 
 }
 
-export const CartsbyUserAndProduct = async (req, res)=> {
-    const { ID_User, ID_Product, CartAmount} = req.body
+export const CartsbyUserAndProduct = async (req, res) => {
+    const { ID_User, products } = req.body; // 'products' debería ser un arreglo de objetos con ID_Product y CartAmount
     try {
-      
-        
-        const Carts = await Shopping_Cart.findOne({   where: {
-            ID_User: ID_User,
-            ID_Product: ID_Product
-        }, });
-          
-      
-      if (!Carts) {
-        const NewCarts = await Shopping_Cart.create({
-            ID_User: ID_User,
-            ID_Product: ID_Product,
-            CartAmount: CartAmount
-         
-        })
-        res.json(NewCarts)
-      }
-      else {
-      
-        Carts.CartAmount = CartAmount;
-        
-        await Cart.save();
+        if (!Array.isArray(products) || products.length === 0) {
+            return res.status(400).json({ message: "El arreglo de productos está vacío o no es válido." });
+        }
 
-      }
+        // Usaremos un array para almacenar las respuestas de cada operación
+        const results = [];
 
-        res.json(Carts)
+        for (const product of products) {
+            const { ID_Product, CartAmount } = product;
 
+            // Buscar el carrito con el producto específico para el usuario
+            let cart = await Shopping_Cart.findOne({
+                where: {
+                    ID_User: ID_User,
+                    ID_Product: ID_Product
+                }
+            });
+
+            if (!cart) {
+                // Crear un nuevo carrito si no existe
+                const newCart = await Shopping_Cart.create({
+                    ID_User: ID_User,
+                    ID_Product: ID_Product,
+                    CartAmount: CartAmount
+                });
+                results.push(newCart);
+            } else {
+                // Actualizar la cantidad en el carrito existente
+                cart.CartAmount = CartAmount;
+                await cart.save();
+                results.push(cart);
+            }
+        }
+
+        res.json({ message: "Operaciones realizadas correctamente" });
     } catch (error) {
-        return res.status(500).json({ message: error.message }) 
+        res.status(500).json({ message: error.message });
     }
+};
 
-
-}
 
 export const updateCart = async (req, res) => {
 
