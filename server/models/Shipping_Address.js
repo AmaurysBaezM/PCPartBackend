@@ -1,5 +1,6 @@
 import {DataTypes} from 'sequelize'
 import {sequelize} from "../database/database.js"
+import {User} from "./Users.js"
 
 
 
@@ -52,26 +53,4 @@ export const Shipping_Address = sequelize.define('Shipping_Address', {
 
 
 },{    timestamps: false,  tableName: 'Shipping_Address'},)
-
-
-Product.hasMany(Spec, {
-    foreignKey: 'ID_Product',
-    sourceKey:'ProductID' 
-})
-
-Spec.belongsTo(Product, {
-    foreignKey: 'ID_Product',
-    targetId:'SpecID' 
-})
-
-Product.hasMany(Shopping_Cart, {
-    foreignKey: 'ID_Product',
-    sourceKey:'ProductID' 
-})
-
-Shopping_Cart.belongsTo(Product, {
-    foreignKey: 'ID_Product',
-    targetId:'CartID' 
-})
-
 
