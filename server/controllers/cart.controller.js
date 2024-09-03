@@ -1,5 +1,7 @@
 import { Shopping_Cart } from '../models/Shopping_Cart.js'
 import { User } from '../models/Users.js';
+import { sequelize } from '../database/database.js'
+import {QueryTypes} from 'sequelize'
 
 export const getCarts = async (req, res) => {
     try {
@@ -45,42 +47,26 @@ export const getCartbyUser = async(req, res) => {
       if (!Users) {
         return res.status(404).json({message: "El usuario no existe"});
       }
-        const Carts = await sequelize.query('SELECT * FROM get_product_cart_info_by_user(:userid);', {
+        const Carts = await sequelize.query('SELECT * from get_product_cart_info_by_user(:userid);', {
             replacements: { userid: id },
             type: QueryTypes.SELECT,
           });
 
           if (!Carts) {
-            return res.status(404).json({message: "Especificacion no existe"});
+            return res.status(404).json({message: "No tienes carrito de compra"});
           }
 
         
           
     
-            res.status(200).json( Carts)
+            res.status(200).json( { Productos: Carts })
             
     } catch (error) {
         return res.status(500).json({ message: error.message }) 
     }
   
   
-    try {
-        const {id} = req.params;
-        
-        const Carts = await Shopping_Cart.findAll({   where: {
-            ID_User: id,
-        }, });
-          
-      
-      if (!Carts) {
-        return res.status(404).json({message: "No tienes productos en tu carrito"});
-      }
-
-        res.json(Carts)
-
-    } catch (error) {
-        return res.status(500).json({ message: error.message }) 
-    }
+    
 }
 
 export const createCarts = async (req, res) => {
